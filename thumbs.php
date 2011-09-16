@@ -390,7 +390,7 @@ class ux_SC_t3lib_thumbs extends SC_t3lib_thumbs {
             }
             $out[1] = $options['minH'];
         }
-
+        
         return $out;
     }
 
