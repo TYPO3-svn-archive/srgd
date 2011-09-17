@@ -42,7 +42,7 @@ class ux_SC_t3lib_thumbs extends SC_t3lib_thumbs {
 
             // Check file extension:
             $reg = array();
-            if (ereg('(.*)\.([^\.]*$)', $this->input, $reg)) {
+            if (preg_match('/(.*)\.([^\.]*$)/i', $this->input, $reg)) {
                 $ext = strtolower($reg[2]);
                 $ext = ($ext == 'jpeg') ? 'jpg' : $ext;
                 if ($ext == 'ttf') {
@@ -118,9 +118,9 @@ class ux_SC_t3lib_thumbs extends SC_t3lib_thumbs {
             $this->output = $outpath . $outfile;
 
             // If thumbnail does not exist, we generate it
-            //if (!@file_exists($this->output)) {
+            if (!@file_exists($this->output)) {
             $this->GDImageExec($this->input, $this->output, $data);
-            //}
+            }
             // The thumbnail is read and output to the browser
             if ($fd = @fopen($this->output, 'rb')) {
                 header('Content-type: image/' . $outext);
@@ -390,7 +390,7 @@ class ux_SC_t3lib_thumbs extends SC_t3lib_thumbs {
             }
             $out[1] = $options['minH'];
         }
-        
+
         return $out;
     }
 
